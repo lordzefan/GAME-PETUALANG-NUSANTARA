@@ -26,6 +26,34 @@ public class Potion : MonoBehaviour
         yIndex = _y;
     }
 
+    // move to target
+    public void MoveToTarget(Vector2 _targetPos)
+    {
+        StartCoroutine(MoveCoroutine(_targetPos));
+    }
+    // move coroutine
+    private IEnumerator MoveCoroutine(Vector2 _targetPos)
+    {
+        isMoving = true;
+        float duration = 0.2f;
+
+        Vector2 startPosition = transform.position;
+        float elaspedTime = 0f;
+
+        while (elaspedTime < duration)
+        {
+            float t = elaspedTime / duration;
+
+            transform.position = Vector2.Lerp(startPosition, _targetPos, t);
+
+            elaspedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = _targetPos;
+        isMoving = false;
+    }
+
 }
 
 public enum PotionType
