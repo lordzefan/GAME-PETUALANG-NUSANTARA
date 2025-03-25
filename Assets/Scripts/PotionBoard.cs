@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.PlasticSCM.Editor.WebApi;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PotionBoard : MonoBehaviour
@@ -128,10 +129,10 @@ public class PotionBoard : MonoBehaviour
 
                         if (matchedPotions.connectedPotions.Count >= 3)
                         {
-                            //complex matching...
+                            MatchResult superMatchedPotions = SuperMatch(matchedPotions);
 
-                            potionToRemove.AddRange(matchedPotions.connectedPotions);
-                            foreach (Potion pot in matchedPotions.connectedPotions)
+                            potionToRemove.AddRange(superMatchedPotions.connectedPotions);
+                            foreach (Potion pot in superMatchedPotions.connectedPotions)
                                 pot.isMatched = true;
                             hasMatched = true;
                         }
@@ -141,6 +142,85 @@ public class PotionBoard : MonoBehaviour
         }
 
         return hasMatched;
+    }
+
+    private MatchResult SuperMatch(MatchResult _matchResult)
+    {
+        // if we have horizontal or long horizontal match
+        if (_matchResult.direction == MatchDirection.Horizontal || _matchResult.direction == MatchDirection.LongHorizontal)
+        {
+            foreach (Potion pot in _matchResult.connectedPotions)
+            {
+                List<Potion> extraConnectedPotions = new();
+
+                CheckDirection(pot, new Vector2Int(0, 1), extraConnectedPotions);
+
+                CheckDirection(pot, new Vector2Int(0, -1), extraConnectedPotions);
+
+                if (extraConnectedPotions.Count >= 2)
+                {
+                    Debug.Log("have a super horizontal match");
+                    extraConnectedPotions.AddRange(_matchResult.connectedPotions);
+
+                    return new MatchResult
+                    {
+                        connectedPotions = extraConnectedPotions,
+                        direction = MatchDirection.Super
+                    };
+                }
+            }
+            return new MatchResult
+            {
+                connectedPotions = _matchResult.connectedPotions,
+                direction = _matchResult.direction
+            };
+        }
+        
+        else if (_matchResult.direction == MatchDirection.Vertical || _matchResult.direction == MatchDirection.LongVertical)
+        {
+            foreach (Potion pot in _matchResult.connectedPotions)
+            {
+                List<Potion> extraConnectedPotions = new();
+
+                CheckDirection(pot, new Vector2Int(1, 0), extraConnectedPotions);
+
+                CheckDirection(pot, new Vector2Int(-1, 0), extraConnectedPotions);
+
+                if (extraConnectedPotions.Count >= 2)
+                {
+                    Debug.Log("have a super vertical match");
+                    extraConnectedPotions.AddRange(_matchResult.connectedPotions);
+
+                    return new MatchResult
+                    {
+                        connectedPotions = extraConnectedPotions,
+                        direction = MatchDirection.Super
+                    };
+                }
+            }
+            return new MatchResult
+            {
+                connectedPotions = _matchResult.connectedPotions,
+                direction = _matchResult.direction
+            };
+        }
+        return null;
+        //     loop through the potion in my match
+        //         create a new list potions 'extra matches'
+        //     checkdirection up
+        //     checkdirection down
+        //     do we have 2 or more extra matches
+        //         we have made a super match - ReturnValueNameAttribute as new MatchResult of type super
+        //     return extra matches
+
+        //if we have vertical or long vertical match
+        //     loop through the potion in my match
+        //         create a new list potions 'extra matches'
+        //     checkdirection up
+        //     checkdirection down
+        //     do we have 2 or more extra matches
+        //         we have made a super match - ReturnValueNameAttribute as new MatchResult of type super
+        //     return extra matches
     }
 
     MatchResult IsConnected(Potion potion)
