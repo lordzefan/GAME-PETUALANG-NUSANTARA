@@ -62,7 +62,7 @@ public class PotionBoard : MonoBehaviour
         potionBoard = new Node [width, height];
 
         spacingX = (float)(width - 1) / 2;
-        spacingY = ((float)(height - 1) / 2)+ 1;
+        spacingY = (float)(height - 1) / 2;
 
         for (int y = 0; y < height; y++)
         {
@@ -248,7 +248,7 @@ public class PotionBoard : MonoBehaviour
     private void SpawnPotionAtTop(int x)
     {
         int index = FindIndexOfLowestNull(x);
-        int locationToMove = 8 - index;
+        int locationToMove = height - index;
         Debug.Log("about to spawn a potion, ideally i'd like to put in the index of: "+ index);
         //get a random potion
         int randomIndex = Random.Range(0, potionPrefebs.Length);
@@ -266,7 +266,7 @@ public class PotionBoard : MonoBehaviour
     private int FindIndexOfLowestNull(int x)
     {
         int lowestNull = 99;
-        for (int y = 7; y >= 0; y--)
+        for (int y = width +1; y >= 0; y--)
         {
             if (potionBoard[x, y].potion == null)
             {
@@ -278,14 +278,7 @@ public class PotionBoard : MonoBehaviour
 
 
 
-    //Removeandrefill (list of potion)
-
-    //refillpotions
-
-    // spawnpotionstop
-
-    //findindexoflowesnull
-
+   
     #endregion
 
     private MatchResult SuperMatch(MatchResult _matchResult)
@@ -349,22 +342,6 @@ public class PotionBoard : MonoBehaviour
             };
         }
         return null;
-        //     loop through the potion in my match
-        //         create a new list potions 'extra matches'
-        //     checkdirection up
-        //     checkdirection down
-        //     do we have 2 or more extra matches
-        //         we have made a super match - ReturnValueNameAttribute as new MatchResult of type super
-        //     return extra matches
-
-        //if we have vertical or long vertical match
-        //     loop through the potion in my match
-        //         create a new list potions 'extra matches'
-        //     checkdirection up
-        //     checkdirection down
-        //     do we have 2 or more extra matches
-        //         we have made a super match - ReturnValueNameAttribute as new MatchResult of type super
-        //     return extra matches
     }
 
     MatchResult IsConnected(Potion potion)
