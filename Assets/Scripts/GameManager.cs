@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,14 +7,21 @@ using System.IO;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
     public GameObject backgroundPanel;
     public GameObject victoryPanel;
     public GameObject losePanel;
+
     public int goal;
     public int move;
     public int points;
     public int highScore;
     public bool isGameEnded;
+
+    public int nextScene;     // Index scene peta/berikutnya
+    public int previousScene; // Index scene untuk mengulang
+    public int quizScene;
+
     public TMP_Text pointText;
     public TMP_Text goalText;
     public TMP_Text moveText;
@@ -30,58 +36,57 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
-        highScoreText.text = "Best Score: "+ highScore.ToString();
+        highScoreText.text = "Best Score: " + highScore.ToString();
     }
 
-    public void Initialize(int _move, int _goal)
-    {
-
-    }
-
-
-    // Update is called once per frame
     void Update()
     {
-        pointText.text = "Points: "+ points.ToString();
-        goalText.text = "Goal: "+ goal.ToString();
-        moveText.text = "move: "+ move.ToString();
-        scoreText.text = "Score: "+ DataManager.instance.score.ToString();
+        pointText.text = "Points: " + points.ToString();
+        goalText.text = "Goal: " + goal.ToString();
+        moveText.text = "Move: " + move.ToString();
+        scoreText.text = "Score: " + DataManager.instance.score.ToString();
     }
 
     public void ProcessTurn(int _pointsToGain, bool _subtractMove)
     {
         points += _pointsToGain;
-        if (_subtractMove)
-            move--;
+        if (_subtractMove) move--;
+
         if (points >= goal)
         {
-            //you won the game
             isGameEnded = true;
-            //Display victory screen
             backgroundPanel.SetActive(true);
             victoryPanel.SetActive(true);
             PotionBoard.Instace.potionParent.SetActive(false);
+
             DataManager.instance.score = points * move;
             SetScore();
+
             return;
         }
 
-        if (move == 0)
+        if (move <= 0)
         {
-            //lose the game
             isGameEnded = true;
             backgroundPanel.SetActive(true);
             losePanel.SetActive(true);
             PotionBoard.Instace.potionParent.SetActive(false);
-            return;
         }
     }
 
-    // attached to a button to change scene when winning
     public void WinGame()
     {
-        SaveScore();
+        SceneManager.LoadScene(quizScene);
+    }
+
+    public void BackToLobby()
+    {
+        SceneManager.LoadScene("Lobby");
+    }
+
+    public void LoseGame()
+    {
+        SceneManager.LoadScene(previousScene);
     }
 
     public int SetScore()
@@ -93,12 +98,11 @@ public class GameManager : MonoBehaviour
         return highScore;
     }
 
-    // attached to a button to change scene when losing
-    public void LoseGame()
-    {
-        SceneManager.LoadScene(0);
-    }
-    
+    // public void GoToTrivia()
+    // {
+    //     SceneManager.LoadScene(9);
+    // }
+
     [System.Serializable]
     class SaveData
     {
@@ -108,12 +112,11 @@ public class GameManager : MonoBehaviour
     public void SaveScore()
     {
         SaveData data = new SaveData();
-        data.highScore= highScore;
+        data.highScore = highScore;
 
         string json = JsonUtility.ToJson(data);
-  
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
-        Debug.Log("file ke simpan");
+        Debug.Log("Score saved");
     }
 
     public void LoadScore()
@@ -125,8 +128,7 @@ public class GameManager : MonoBehaviour
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
             highScore = data.highScore;
-            Debug.Log("file ke keload");
+            Debug.Log("Score loaded");
         }
     }
-
 }

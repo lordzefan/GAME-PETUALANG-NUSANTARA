@@ -6,9 +6,54 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Lobby.unity
+    guid: 46526a2856f3902428fdd74556d0d020
+  - enabled: 1
     path: Assets/Scenes/Level_1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Quiz_1.unity
     guid: a881254f5425cb74198b379164cafda8
+  - enabled: 1
+    path: Assets/Scenes/Quiz_2.unity
+    guid: 19f70659e921da64e9d2ffaa6e41c2c5
+  - enabled: 1
+    path: Assets/Scenes/Quiz_3.unity
+    guid: 636346a4120d707418dfcf228df03bf1
+  - enabled: 1
+    path: Assets/Scenes/Quiz_4.unity
+    guid: 2d979db28b19db04fbfbdb681b3419a4
+  - enabled: 1
+    path: Assets/Scenes/Quiz_5.unity
+    guid: 4c6d499a4b819714aa90915064653b97
+  - enabled: 1
+    path: Assets/Scenes/Quiz_6.unity
+    guid: f181d8c05bc95394da939c6b8053920e
+  - enabled: 1
+    path: Assets/Scenes/Quiz_7.unity
+    guid: 3a1cdfe03389d6e429aaa4d6c0f819c6
+  - enabled: 1
+    path: Assets/Scenes/Quiz_8.unity
+    guid: 89780f3f375d5b94fbb1d03435cac518
+  - enabled: 1
+    path: Assets/Scenes/Level_2.unity
+    guid: 7c6138f4af915584f9f8fb678750da63
+  - enabled: 1
+    path: Assets/Scenes/Level_3.unity
+    guid: abefdfd3803f6334db4ced665b128b50
+  - enabled: 1
+    path: Assets/Scenes/Level_4.unity
+    guid: 40ed46ef5050a584f9230def85759156
+  - enabled: 1
+    path: Assets/Scenes/Level_5.unity
+    guid: 4045aab62d7a6c146ac7a27fe732ec69
+  - enabled: 1
+    path: Assets/Scenes/Level_6.unity
+    guid: dae408d35d30b9343b87fc76424adcca
+  - enabled: 1
+    path: Assets/Scenes/Level_7.unity
+    guid: 29dc9fa4eb489bc4192480cbf48f4144
+  - enabled: 1
+    path: Assets/Scenes/Level_8.unity
+    guid: 89f557d78c0473245bb55cddd92b1721
   m_configObjects: {}
