@@ -22,6 +22,8 @@ Game ini menggabungkan:
 - 🗺️ 8 Level bertema landmark Indonesia
 - 📚 Trivia edukatif setelah menyelesaikan level
 - 💣 Power-Up Bomb dengan area ledakan 3x3
+- 🔄 Fitur reshuffle board sebanyak 3 kali
+- 🎯 Sistem move limitation
 - 🏆 Sistem penyimpanan skor
 - 🔊 Audio dan sound effect
 - ✨ Visual effect saat bidak hancur dan combo
@@ -53,6 +55,18 @@ Gameplay dirancang santai namun tetap menantang.
 
 ---
 
+# Sistem Move
+
+Setiap level memiliki jumlah **move** atau langkah tertentu untuk menggerakkan bidak puzzle.
+
+- Setiap pertukaran bidak akan mengurangi 1 move
+- Pemain harus menyelesaikan objective sebelum move habis
+- Jika move habis sebelum target selesai, maka pemain akan mengalami **Game Over**
+
+Fitur ini membuat gameplay menjadi lebih strategis dan menantang.
+
+---
+
 # Power-Up
 
 ## 💣 Bomb
@@ -62,6 +76,19 @@ Bomb akan muncul ketika terjadi match tertentu dari bidak yang berdekatan.
 - Menghancurkan area **3x3**
 - Membersihkan banyak bidak sekaligus
 - Membantu membuat combo besar
+
+---
+
+# Fitur Reshuffle Board
+
+Pemain memiliki kemampuan untuk melakukan **reshuffle** atau mengacak ulang seluruh bidak pada board.
+
+## Fungsi Reshuffle
+- Mengganti posisi seluruh bidak secara acak
+- Membantu ketika pemain kesulitan menemukan match
+- Dapat digunakan maksimal **3 kali** selama permainan
+
+Fitur ini membantu pemain menghindari kondisi board yang sulit dimainkan.
 
 ---
 
@@ -89,6 +116,20 @@ Setelah menyelesaikan puzzle pada setiap level, pemain akan mendapatkan trivia m
 - Informasi wisata Indonesia
 
 Fitur ini membuat game tidak hanya menghibur tetapi juga edukatif.
+
+---
+
+# Finish Game
+
+Pemain dinyatakan menyelesaikan game apabila berhasil:
+- Menyelesaikan seluruh 8 level
+- Membuka semua trivia provinsi
+- Menjelajahi seluruh landmark Nusantara dalam permainan
+
+Setelah level terakhir selesai, pemain akan mendapatkan:
+- Tampilan ending game
+- Rekap skor akhir
+- Pesan apresiasi sebagai penjelajah Nusantara
 
 ---
 
