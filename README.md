@@ -194,6 +194,9 @@ Coming Soon
 git clone https://github.com/username/petualangan-nusantara.git
 cd petualangan-nusantara
 ```
+```bash
+https://play.unity.com/en/games/a9cc5a8e-b0f6-445a-ade9-2f8c6cfbcc9a/webgl-builds
+```
 
 ---
 
